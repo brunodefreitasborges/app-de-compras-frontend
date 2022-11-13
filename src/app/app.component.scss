@@ -1,0 +1,16 @@
+.app-container {
+  width: 375px;
+}
+mat-sidenav {
+
+  width: 40%;
+}
+mat-sidenav-container {
+  height: 90vh;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+
