@@ -1,14 +1,33 @@
 <div class="app-container">
-    <app-header (showSideNav)="toggleSideNav()"></app-header>
-
-    <mat-sidenav-container  (backdropClick)="toggleSideNav()">
-      <mat-sidenav autoFocus="false" mode="over" [opened]="showSideNav">
+    <mat-sidenav-container  (backdropClick)="toggleSideNavs()">
+      <mat-sidenav autoFocus="false" mode="push" [opened]="showLeftSideNav">
         <div fxLayout="column" fxLayoutGap="-16px">
-          <h3>Teste de Menu</h3>
+          <ul class="sidenav-list">
+            <li><a href="#">LADO ESQUERDO</a></li>
+          </ul>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav autoFocus="false" mode="push" position="end" [opened]="showRightSideNav">
+        <div fxLayout="column" fxLayoutGap="-16px">
+          <ul class="sidenav-list">
+            <li><a href="#">LADO DIREITO</a></li>
+          </ul>
         </div>
       </mat-sidenav>
       <mat-sidenav-content>
-        <h1>Main Content</h1>
+        <app-header (showLeftSideNav)="toggleLeftSideNav()" (showRightSideNav)="toggleRightSideNav()"></app-header>
+        <div class="grocery-list" fxLayout="column" fxLayoutGap="16px" >
+
+                  <app-grocery-item
+                  *ngFor="let grocery of groceries"
+                  [id]="grocery.id"
+                  [category]="grocery.category"
+                  [product]="grocery.product"
+                  [quantity]="grocery.quantity"
+                  [price]="grocery.price">
+                  </app-grocery-item>
+        </div>
+
       </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

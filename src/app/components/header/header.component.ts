@@ -6,16 +6,23 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Output() showSideNav: EventEmitter<boolean> = new EventEmitter();
-  showSideNavBool: boolean = false;
+  @Output() showLeftSideNav: EventEmitter<boolean> = new EventEmitter();
+  @Output() showRightSideNav: EventEmitter<boolean> = new EventEmitter();
+  showLeftSideNavBool: boolean = false;
+  showRightSideNavBool: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleSideNav() {
-    this.showSideNav.emit();
-    this.showSideNavBool = !this.showSideNavBool;
+  toggleLeftSideNav() {
+    this.showLeftSideNav.emit();
+    this.showLeftSideNavBool = !this.showLeftSideNavBool;
+  }
+
+  toggleRightSideNav() {
+    this.showRightSideNav.emit();
+    this.showRightSideNavBool = !this.showRightSideNavBool;
   }
 
 }

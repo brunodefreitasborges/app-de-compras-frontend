@@ -1,0 +1,21 @@
+.mat-checkbox-background, .mat-checkbox-frame {
+  border-radius: 70% !important;
+}
+
+mat-card {
+  transition: all 2s linear 1s;
+}
+
+.grocery-item {
+  width: 100%;
+  height: 32px;
+}
+
+.checked-card {
+  background-color: rgba($color: #000000, $alpha: 0.2);
+}
+
+.checked-text {
+  text-decoration: line-through;
+}
+

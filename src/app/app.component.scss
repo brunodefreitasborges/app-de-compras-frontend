@@ -1,16 +1,36 @@
 .app-container {
   width: 375px;
 }
-mat-sidenav {
 
+mat-sidenav {
+  background-color: #673AB7 !important;
   width: 40%;
 }
+
 mat-sidenav-container {
-  height: 90vh;
+  height: 100vh;
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(0, 0, 0, 0);
+}
+
+.sidenav-list {
+  list-style-type: none;
+  padding-inline-start: 16px;
+}
+
+.sidenav-list a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidenav-list a:hover {
+  text-decoration: underline;
+}
+
+.grocery-list {
+  padding: 16px;
 }
 
 
