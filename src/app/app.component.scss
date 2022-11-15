@@ -15,6 +15,13 @@ mat-sidenav-container {
   background-color: rgba(0, 0, 0, 0);
 }
 
+mat-progress-spinner{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -400%);
+  z-index: 5;
+}
+
 .sidenav-list {
   list-style-type: none;
   padding-inline-start: 16px;
@@ -29,8 +36,17 @@ mat-sidenav-container {
   text-decoration: underline;
 }
 
-.grocery-list {
-  padding: 16px;
+.mat-expansion-panel-body {
+  padding: 0px !important;
+  margin: 0px 16px 8px 16px !important;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0 !important;
+}
+
+mat-panel-title mat-icon {
+  margin-right: 8px;
 }
 
 

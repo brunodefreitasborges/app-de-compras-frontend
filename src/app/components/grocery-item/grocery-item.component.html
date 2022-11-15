@@ -1,17 +1,28 @@
+<mat-divider></mat-divider>
 <mat-card
-[ngClass]="checked ? 'checked-card' : ''"
-(click)="toggleChecked()"
+[@checkedState]="checked ? 'checked' : 'unchecked'"
 [id]="id"
 class="grocery-item"
 fxLayoutAlign="space-between center">
 
-  <div class="left" fxLayoutAlign="start center" fxLayoutGap="16px">
-    <mat-icon color="primary">{{ checkIcon }}</mat-icon>
+  <div
+    class="left"
+    fxFlex="0%"
+    fxLayoutAlign="start center"
+    fxLayoutGap="16px"
+    (click)="toggleChecked()">
+    <mat-icon
+
+    color="primary"
+    class="grocery-item-icon">
+    {{ checkIcon }}
+  </mat-icon>
     <span [ngClass]="checked ? 'checked-text' : ''">{{ product }} - {{ quantity }}</span>
   </div>
   <div class="right" *ngIf="!checked">
-    <mat-icon color="accent">edit</mat-icon>
-    <mat-icon color="warn">delete</mat-icon>
+    <mat-icon color="accent" (click)="edit()">edit</mat-icon>
+    <mat-icon color="warn" (click)="delete()">delete</mat-icon>
   </div>
-
 </mat-card>
+
+

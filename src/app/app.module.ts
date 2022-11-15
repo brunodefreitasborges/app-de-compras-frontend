@@ -9,12 +9,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { GroceryItemComponent } from './components/grocery-item/grocery-item.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppStore } from './store/app.store';
+import { NetworkInterceptor } from './services/network.interceptor';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    GroceryItemComponent
+    GroceryItemComponent,
+    DialogComponent,
   ],
   imports: [
     MaterialModule,
@@ -22,9 +27,17 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AppStore,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NetworkInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

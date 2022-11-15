@@ -10,3 +10,45 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.mat-title {
+  margin: 0 !important;
+}
+
+.mat-divider {
+  margin: 0px 8px !important;
+  border-top-width: 2px !important;
+  border-top-style: dashed !important;
+}
+
+.color-purple {
+  color: #AF52DE;
+}
+
+.border-purple .mat-expansion-panel-body {
+  border-left: 4px solid #AF52DE;
+}
+
+.color-green {
+  color: #34C759;
+}
+
+.border-green .mat-expansion-panel-body {
+  border-left: 4px solid #34C759;
+}
+
+.color-yellow {
+  color: #FF9500;
+}
+
+.border-yellow .mat-expansion-panel-body {
+  border-left: 4px solid #FF9500;
+}
+
+.color-red {
+  color: #FF2D55;
+}
+
+.border-red .mat-expansion-panel-body {
+  border-left: 4px solid #FF2D55;
+}
