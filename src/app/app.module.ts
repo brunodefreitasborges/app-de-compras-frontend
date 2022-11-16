@@ -8,18 +8,18 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { GroceryItemComponent } from './components/grocery-item/grocery-item.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppStore } from './store/app.store';
 import { NetworkInterceptor } from './services/network.interceptor';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     GroceryItemComponent,
-    DialogComponent,
+    DialogFormComponent,
   ],
   imports: [
     MaterialModule,
@@ -28,6 +28,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [

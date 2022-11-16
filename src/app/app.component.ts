@@ -1,9 +1,8 @@
-import { animate, animateChild, query, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { Grocery } from './models/grocery-model'
+import { Observable} from 'rxjs';
+import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
+import { Grocery } from './models/grocery-model';
 import { LoadingService } from './services/loading.service';
 import { AppStore } from './store/app.store';
 
@@ -16,12 +15,11 @@ import { AppStore } from './store/app.store';
 export class AppComponent implements OnInit {
   title = 'My Groceries';
   loading$ = this.loader.loading$;
-  showLeftSideNav!: boolean;
-  showRightSideNav!: boolean;
-  hortifruti!: Grocery[];
-  mercearia!: Grocery[];
-  limpeza!: Grocery[];
-  acougue!: Grocery[];
+  showSideNav!: boolean;
+  hortifruti$!: Observable<Grocery[]>;
+  mercearia$!: Observable<Grocery[]>;
+  limpeza$!: Observable<Grocery[]>;
+  acougue$!: Observable<Grocery[]>;
 
   constructor(
     private store: AppStore,
@@ -31,50 +29,77 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.fetchData();
-    this.store.getGroceries().subscribe((groceries) => {
-      this.hortifruti = groceries.filter((grocery) => grocery.category === 'Hortifruti');
-      this.mercearia = groceries.filter((grocery) => grocery.category === 'Mercearia');
-      this.limpeza = groceries.filter((grocery) => grocery.category === 'Limpeza');
-      this.acougue = groceries.filter((grocery) => grocery.category === 'Acougue');
-    })
+    this.hortifruti$ = this.store.getGroceries('hortifruti');
+    this.mercearia$ = this.store.getGroceries('mercearia');
+    this.limpeza$ = this.store.getGroceries('limpeza');
+    this.acougue$ = this.store.getGroceries('acougue');
   }
 
   // Dialog Logic
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px'
+  openDialog(flag: string, grocery: Grocery): void {
+    const dialogRef = this.dialog.open(DialogFormComponent, {
+      disableClose: true,
+      width: '250px',
+      data: {
+        flag: flag,
+        id: grocery.id,
+        category: grocery.category,
+        product: grocery.product,
+        quantity: grocery.quantity,
+        price: grocery.price,
+        checked: grocery.checked
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if(result === undefined) {
+        return;
+      } else {
+        if(result.flag === 'create') {
+          this.onAddGrocery(result.data);
+        } else if(result.flag === 'update') {
+          this.onUpdateGrocery(result.data);
+        }
+      }
     });
   }
 
   // Store Manipulation Logic
-  onEdit() {
-    this.openDialog();
+
+  add() {
+    this.openDialog('create', {
+      id: '',
+      category: '',
+      product: '',
+      quantity: 0,
+      price: 0,
+      checked: false
+    });
+  }
+
+  edit(grocery: Grocery) {
+    this.openDialog('update', grocery)
+   }
+
+  onAddGrocery(grocery: Grocery) {
+    this.store.addGrocery(grocery);
+  }
+
+  onUpdateGrocery(grocery: Grocery) {
+    this.store.updateGrocery(grocery);
   }
 
   onDelete(groceryId: string) {
     this.store.deleteGrocery(groceryId);
   }
 
-
-
-  // Side Navs Logic
-  toggleSideNavs() {
-    if(this.showLeftSideNav) {
-      this.showLeftSideNav = !this.showLeftSideNav;
-    } else if(this.showRightSideNav) {
-      this.showRightSideNav = !this.showRightSideNav;
-    }
+  checked(grocery: Grocery) {
+    this.store.updateGrocery(grocery);
   }
 
-  toggleLeftSideNav() {
-    this.showLeftSideNav = !this.showLeftSideNav;
+  // Side Nav Logic
+  toggleSideNav() {
+    this.showSideNav = !this.showSideNav;
   }
 
-  toggleRightSideNav() {
-    this.showRightSideNav = !this.showRightSideNav;
-  }
 }

@@ -1,0 +1,38 @@
+<form (ngSubmit)="submit()" [formGroup]="dialogForm" #formDir="ngForm">
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Categoria</mat-label>
+      <mat-select formControlName="category">
+        <mat-option value="hortifruti">Hortifruti</mat-option>
+        <mat-option value="limpeza">Limpeza</mat-option>
+        <mat-option value="mercearia">Mercearia</mat-option>
+        <mat-option value="acougue">Açougue</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="category.invalid && formDir.submitted" class="validation-error">
+      * A categoria é obrigatória.
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Produto</mat-label>
+      <input type="text" matInput placeholder="ex: bananas" formControlName="product">
+    </mat-form-field>
+    <div *ngIf="product.invalid && formDir.submitted" class="validation-error">
+      * O produto é obrigatório.
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantidade</mat-label>
+      <input matInput type="number" placeholder="ex: 1" formControlName="quantity">
+    </mat-form-field>
+    <div *ngIf="quantity.invalid && formDir.submitted" class="validation-error">
+      * A quantidade é obrigatória.
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Preço</mat-label>
+      <input matInput type="number" placeholder="0.00" formControlName="price">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-flat-button color="primary" type="submit">Ok</button>
+    <button mat-flat-button color="warn" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

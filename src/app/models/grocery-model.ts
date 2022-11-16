@@ -6,3 +6,4 @@ export interface Grocery {
   price: number,
   checked: boolean
 }
+

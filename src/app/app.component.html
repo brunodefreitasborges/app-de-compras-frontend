@@ -1,24 +1,17 @@
 <div class="app-container">
-
-    <mat-sidenav-container  (backdropClick)="toggleSideNavs()">
-      <mat-sidenav autoFocus="false" mode="push" [opened]="showLeftSideNav">
+  <app-header (showSideNav)="toggleSideNav()"></app-header>
+    <mat-sidenav-container  (backdropClick)="toggleSideNav()">
+      <mat-sidenav autoFocus="false" mode="push" [opened]="showSideNav">
         <div fxLayout="column" fxLayoutGap="-16px">
           <ul class="sidenav-list">
             <li><a href="#">LADO ESQUERDO</a></li>
           </ul>
         </div>
       </mat-sidenav>
-      <mat-sidenav autoFocus="false" mode="push" position="end" [opened]="showRightSideNav">
-        <div fxLayout="column" fxLayoutGap="-16px">
-          <ul class="sidenav-list">
-            <li><a href="#">LADO DIREITO</a></li>
-          </ul>
-        </div>
-      </mat-sidenav>
       <mat-sidenav-content>
-        <app-header (showLeftSideNav)="toggleLeftSideNav()" (showRightSideNav)="toggleRightSideNav()"></app-header>
+
         <mat-accordion multi="false" fxLayout="column" fxLayoutGap="0px" >
-          <mat-expansion-panel class="hortifruti border-green" *ngIf="hortifruti.length > 0">
+          <mat-expansion-panel class="hortifruti border-green">
             <mat-expansion-panel-header>
               <mat-panel-title class="mat-title color-green">
                 <mat-icon>spa</mat-icon>
@@ -26,19 +19,21 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
                   <app-grocery-item
-                  *ngFor="let grocery of hortifruti"
+                  *ngFor="let grocery of hortifruti$ | async"
                   [id]="grocery.id"
                   [category]="grocery.category"
                   [product]="grocery.product"
                   [quantity]="grocery.quantity"
                   [price]="grocery.price"
-                  (onEdit)="onEdit()"
+                  [checked]="grocery.checked"
+                  (onEdit)="edit($event)"
                   (onDelete)="onDelete(grocery.id)"
+                  (onCheck)="checked($event)"
                   >
                   </app-grocery-item>
                   <mat-divider></mat-divider>
           </mat-expansion-panel>
-          <mat-expansion-panel class="mercearia border-yellow" *ngIf="mercearia.length > 0">
+         <mat-expansion-panel class="mercearia border-yellow">
             <mat-expansion-panel-header>
               <mat-panel-title class="mat-title color-yellow">
                 <mat-icon>bakery_dining</mat-icon>
@@ -46,19 +41,21 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
-            *ngFor="let grocery of mercearia"
+            *ngFor="let grocery of mercearia$ | async"
             [id]="grocery.id"
             [category]="grocery.category"
             [product]="grocery.product"
             [quantity]="grocery.quantity"
             [price]="grocery.price"
-            (onEdit)="onEdit()"
+            [checked]="grocery.checked"
+            (onEdit)="edit($event)"
             (onDelete)="onDelete(grocery.id)"
+            (onCheck)="checked($event)"
             >
             </app-grocery-item>
             <mat-divider></mat-divider>
           </mat-expansion-panel>
-          <mat-expansion-panel class="limpeza border-purple" *ngIf="limpeza.length > 0">
+          <mat-expansion-panel class="limpeza border-purple">
             <mat-expansion-panel-header>
               <mat-panel-title class="mat-title color-purple">
                 <mat-icon>clean_hands</mat-icon>
@@ -66,19 +63,21 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
-            *ngFor="let grocery of limpeza"
+            *ngFor="let grocery of limpeza$ | async"
             [id]="grocery.id"
             [category]="grocery.category"
             [product]="grocery.product"
             [quantity]="grocery.quantity"
             [price]="grocery.price"
-            (onEdit)="onEdit()"
+            [checked]="grocery.checked"
+            (onEdit)="edit($event)"
             (onDelete)="onDelete(grocery.id)"
+            (onCheck)="checked($event)"
             >
             </app-grocery-item>
             <mat-divider></mat-divider>
           </mat-expansion-panel>
-          <mat-expansion-panel class="acougue border-red" *ngIf="acougue.length > 0">
+          <mat-expansion-panel class="acougue border-red">
             <mat-expansion-panel-header>
               <mat-panel-title class="mat-title color-red">
                 <mat-icon>set_meal</mat-icon>
@@ -86,14 +85,16 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
-            *ngFor="let grocery of acougue"
+            *ngFor="let grocery of acougue$ | async"
             [id]="grocery.id"
             [category]="grocery.category"
             [product]="grocery.product"
             [quantity]="grocery.quantity"
             [price]="grocery.price"
-            (onEdit)="onEdit()"
+            [checked]="grocery.checked"
+            (onEdit)="edit($event)"
             (onDelete)="onDelete(grocery.id)"
+            (onCheck)="checked($event)"
             >
             </app-grocery-item>
             <mat-divider></mat-divider>
@@ -101,6 +102,9 @@
         </mat-accordion>
       </mat-sidenav-content>
     </mat-sidenav-container>
+    <button class="add-button" mat-mini-fab color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
     <mat-progress-spinner *ngIf="loading$ | async" [mode]="'indeterminate'"></mat-progress-spinner>
 </div>
 

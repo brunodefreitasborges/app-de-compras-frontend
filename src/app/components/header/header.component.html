@@ -1,17 +1,11 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="menu-btn">
-    <button mat-mini-fab color="primary" (click)="toggleLeftSideNav()">
-      <mat-icon>notes</mat-icon>
-    </button>
-  </div>
+
   <div class="logo" fxLayoutAlign="center center">
-    <img src="../../../assets/logo.png">
+    <img src="../../../assets/newLogo.png">
   </div>
-  <div class="menu-btn">
-    <button mat-mini-fab color="primary" (click)="toggleRightSideNav()">
-      <mat-icon>mood</mat-icon>
-    </button>
-  </div>
+  <div class="menu-btn" fxLayoutAlign="center center">
+    <mat-icon (click)="toggleSideNav()">menu</mat-icon>
+</div>
 
 </mat-toolbar>
 

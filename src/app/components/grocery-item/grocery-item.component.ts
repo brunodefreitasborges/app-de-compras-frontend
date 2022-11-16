@@ -1,6 +1,6 @@
-import { animate, keyframes, query, state, style, transition, trigger } from '@angular/animations';
-import { outputAst } from '@angular/compiler';
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Grocery } from 'src/app/models/grocery-model';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -19,22 +19,40 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
     ])
   ]
 })
-export class GroceryItemComponent {
+export class GroceryItemComponent implements OnInit {
   @Input() id!: string;
   @Input() category!: string;
   @Input() product!: string;
   @Input() quantity!: number;
   @Input() price: number = 0.00
-  @Input() checked: boolean = false;
-  @Output() onEdit: EventEmitter<any> = new EventEmitter();
+  @Input() checked!: boolean;
+
+  @Output() onEdit: EventEmitter<Grocery> = new EventEmitter();
   @Output() onDelete: EventEmitter<string> = new EventEmitter();
+  @Output() onCheck: EventEmitter<Grocery> = new EventEmitter();
 
-  checkIcon: string = 'radio_button_unchecked';
+  checkIcon!: string;
 
-  constructor() { }
+  constructor() {}
+
+   ngOnInit(): void {
+    if (this.checked) {
+      this.checkIcon = 'done'
+    } else if (!this.checked) {
+      this.checkIcon = 'radio_button_unchecked'
+    }
+   }
+
 
   edit() {
-    this.onEdit.emit();
+    this.onEdit.emit({
+      id: this.id,
+      category: this.category,
+      product: this.product,
+      quantity: this.quantity,
+      price: this.price,
+      checked: this.checked
+    });
   }
 
   delete() {
@@ -47,6 +65,14 @@ export class GroceryItemComponent {
 
   toggleChecked() {
     this.checked = !this.checked;
+    this.onCheck.emit({
+      id: this.id,
+      category: this.category,
+      product: this.product,
+      quantity: this.quantity,
+      price: this.price,
+      checked: this.checked
+    });
     if (this.checked) {
       this.checkIcon = 'done'
     } else if (!this.checked) {
