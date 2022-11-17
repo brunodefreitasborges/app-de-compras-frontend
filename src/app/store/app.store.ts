@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Grocery } from '../models/grocery-model';
 import {ComponentStore, tapResponse} from "@ngrx/component-store";
 import { ApiService } from '../integration/api.service';
-import { concatMap, map, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, concatMap, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface Groceries {
@@ -10,12 +10,12 @@ export interface Groceries {
 }
 
 const initialState: Groceries = {
-  groceries: []
+  groceries: [],
 };
 
 @Injectable()
 export class AppStore extends ComponentStore<Groceries> {
-
+  error = new BehaviorSubject<any>({});
 
   constructor(private apiService : ApiService) {
     super(initialState);
@@ -27,10 +27,8 @@ export class AppStore extends ComponentStore<Groceries> {
     this.apiService.addGrocery(grocery).pipe(
       tapResponse(
         () => this.fetchData(),
-        (error: HttpErrorResponse) => console.error(error)
-      )
-    ))
-  ))
+        (error: HttpErrorResponse) => console.error(error))
+  ))));
 
   updateGrocery = this.effect<Grocery>((grocery$) =>
   grocery$.pipe(
@@ -42,8 +40,6 @@ export class AppStore extends ComponentStore<Groceries> {
       )
     ))
   ))
-
-
 
   deleteGrocery = this.effect<string>((groceryId$) =>
   groceryId$.pipe(

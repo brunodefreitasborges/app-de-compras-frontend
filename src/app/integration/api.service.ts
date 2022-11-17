@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   updateGrocery(grocery: Grocery, id: string): Observable<Grocery> {
-    return this.http.put<Grocery>(this.apiUrl + id, grocery);
+    return this.http.put<Grocery>(this.apiUrl + id, grocery)
   }
 
   deleteGrocery(id: string) {

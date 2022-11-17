@@ -1,3 +1,4 @@
+import { DialogErrorComponent } from './components/dialog-error/dialog-error.component';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable} from 'rxjs';
@@ -21,6 +22,8 @@ export class AppComponent implements OnInit {
   limpeza$!: Observable<Grocery[]>;
   acougue$!: Observable<Grocery[]>;
 
+  errors: [{}] = [{}];
+
   constructor(
     private store: AppStore,
     private loader: LoadingService,
@@ -33,6 +36,11 @@ export class AppComponent implements OnInit {
     this.mercearia$ = this.store.getGroceries('mercearia');
     this.limpeza$ = this.store.getGroceries('limpeza');
     this.acougue$ = this.store.getGroceries('acougue');
+    this.store.error.subscribe(error => {
+      this.errors.pop();
+      this.errors.push(error);
+    });
+    console.log(this.errors)
   }
 
   // Dialog Logic
@@ -64,8 +72,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Store Manipulation Logic
+  openErrorDialog(): void {
+    const dialogRef = this.dialog.open(DialogErrorComponent)
+  }
 
+  // Store Manipulation Logic
   add() {
     this.openDialog('create', {
       id: '',
@@ -82,7 +93,7 @@ export class AppComponent implements OnInit {
    }
 
   onAddGrocery(grocery: Grocery) {
-    this.store.addGrocery(grocery);
+    this.store.addGrocery(grocery)
   }
 
   onUpdateGrocery(grocery: Grocery) {

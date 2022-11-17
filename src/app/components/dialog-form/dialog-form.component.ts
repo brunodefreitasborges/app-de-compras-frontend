@@ -41,6 +41,7 @@ export class DialogFormComponent implements OnInit {
   }
 
   cancel(): void {
+  
     this.dialogRef.close();
   }
 
@@ -48,7 +49,7 @@ export class DialogFormComponent implements OnInit {
     if(this.dialogForm.invalid) {
       return;
     }
-    const result: Object = {
+    let result: Object = {
       flag: this.data.flag,
       data : {
         id: this.data.id,
