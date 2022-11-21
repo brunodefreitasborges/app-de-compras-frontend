@@ -6,11 +6,10 @@ import { BehaviorSubject, concatMap, map, Observable, Subject, switchMap, tap } 
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface Groceries {
-  groceries: Grocery[];
+  groceries?: Grocery[];
 }
 
 const initialState: Groceries = {
-  groceries: [],
 };
 
 @Injectable()
@@ -67,11 +66,11 @@ export class AppStore extends ComponentStore<Groceries> {
     (state, groceries: Grocery[]) => ({...state, groceries})
    );
 
-   getGroceries = (category: string): Observable<Grocery[]> => {
+   getGroceries = (category: string): Observable<Grocery[] | undefined> => {
     return this.select(
       state => state.groceries
     ).pipe(map((groceries) => {
-      return groceries.filter(grocery => grocery.category === category)
+      return groceries?.filter(grocery => grocery.category === category)
     }))
    }
 }

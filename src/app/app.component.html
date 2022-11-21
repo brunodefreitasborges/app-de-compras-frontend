@@ -11,11 +11,11 @@
       <mat-sidenav-content>
 
         <mat-accordion multi="false" fxLayout="column" fxLayoutGap="0px" >
-          <mat-expansion-panel class="hortifruti border-green">
-            <mat-expansion-panel-header>
+          <mat-expansion-panel class="hortifruti border-green" *ngIf="hortifruti$ | async as hortifruti">
+            <mat-expansion-panel-header *ngFor="let item of hortifruti">
               <mat-panel-title class="mat-title color-green">
                 <mat-icon>spa</mat-icon>
-                Hortifruti
+                {{item.category[0].toUpperCase() + item.category.slice(1)}}
               </mat-panel-title>
             </mat-expansion-panel-header>
                   <app-grocery-item
@@ -33,11 +33,11 @@
                   </app-grocery-item>
                   <mat-divider></mat-divider>
           </mat-expansion-panel>
-         <mat-expansion-panel class="mercearia border-yellow">
-            <mat-expansion-panel-header>
+         <mat-expansion-panel class="mercearia border-yellow" *ngIf="mercearia$ | async as mercearia">
+            <mat-expansion-panel-header *ngFor="let item of mercearia">
               <mat-panel-title class="mat-title color-yellow">
                 <mat-icon>bakery_dining</mat-icon>
-                Mercearia
+                {{item.category[0].toUpperCase() + item.category.slice(1)}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
@@ -55,11 +55,11 @@
             </app-grocery-item>
             <mat-divider></mat-divider>
           </mat-expansion-panel>
-          <mat-expansion-panel class="limpeza border-purple">
-            <mat-expansion-panel-header>
+          <mat-expansion-panel class="limpeza border-purple" *ngIf="limpeza$ | async as limpeza">
+            <mat-expansion-panel-header *ngFor="let item of limpeza">
               <mat-panel-title class="mat-title color-purple">
                 <mat-icon>clean_hands</mat-icon>
-                Limpeza
+                {{item.category[0].toUpperCase() + item.category.slice(1)}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
@@ -77,11 +77,12 @@
             </app-grocery-item>
             <mat-divider></mat-divider>
           </mat-expansion-panel>
-          <mat-expansion-panel class="acougue border-red">
-            <mat-expansion-panel-header>
+
+          <mat-expansion-panel class="acougue border-red" *ngIf="acougue$ | async as acougue">
+            <mat-expansion-panel-header *ngFor="let item of acougue">
               <mat-panel-title class="mat-title color-red">
                 <mat-icon>set_meal</mat-icon>
-                Açougue
+                {{item.category[0].toUpperCase() + item.category.slice(1)}}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-grocery-item
@@ -97,7 +98,7 @@
             (onCheck)="checked($event)"
             >
             </app-grocery-item>
-            <mat-divider></mat-divider>
+
           </mat-expansion-panel>
         </mat-accordion>
       </mat-sidenav-content>

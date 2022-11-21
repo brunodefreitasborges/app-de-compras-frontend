@@ -17,10 +17,12 @@ export class AppComponent implements OnInit {
   title = 'My Groceries';
   loading$ = this.loader.loading$;
   showSideNav!: boolean;
-  hortifruti$!: Observable<Grocery[]>;
-  mercearia$!: Observable<Grocery[]>;
-  limpeza$!: Observable<Grocery[]>;
-  acougue$!: Observable<Grocery[]>;
+  hortifruti$!: Observable<Grocery[] | undefined>;
+  mercearia$!: Observable<Grocery[]  | undefined>;
+  limpeza$!: Observable<Grocery[] | undefined>;
+  acougue$!: Observable<Grocery[] | undefined>;
+
+  showAcougue: boolean = true;
 
   errors: [{}] = [{}];
 
