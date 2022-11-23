@@ -1,30 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, Observable, tap } from 'rxjs';
-import { Grocery } from '../models/grocery-model';
+import {  Observable, of } from 'rxjs';
+import { Groceries, Grocery } from '../models/grocery-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  private storage: Storage;
 
-  private apiUrl: string = 'https://grocery-backend-production.up.railway.app/'
+  constructor(private http: HttpClient) {
+    this.storage = window.localStorage;
+   }
 
-  constructor(private http: HttpClient) { }
-
-  getGroceries(): Observable<Grocery[]> {
-    return this.http.get<Grocery[]>(this.apiUrl);
+  setInitialGroceries(): void {
+    this.http.get<Groceries[]>('assets/groceries.json').subscribe(groceries => {
+      this.storage.setItem('key', JSON.stringify(groceries));
+  });
   }
 
-  addGrocery(grocery: Grocery): Observable<Grocery> {
-    return this.http.post<Grocery>(this.apiUrl, grocery);
-  }
-
-  updateGrocery(grocery: Grocery, id: string): Observable<Grocery> {
-    return this.http.put<Grocery>(this.apiUrl + id, grocery)
-  }
-
-  deleteGrocery(id: string) {
-    return this.http.delete(this.apiUrl + id);
+  getGroceries(): Observable<Groceries[]> {
+    const groceries: Groceries[] = JSON.parse(this.storage.getItem('key') || '[]');
+    return of(groceries);
   }
 }

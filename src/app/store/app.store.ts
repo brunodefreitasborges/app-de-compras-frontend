@@ -1,61 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Grocery } from '../models/grocery-model';
+import { Groceries, Grocery } from '../models/grocery-model';
 import {ComponentStore, tapResponse} from "@ngrx/component-store";
 import { ApiService } from '../integration/api.service';
-import { BehaviorSubject, concatMap, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface Groceries {
-  groceries?: Grocery[];
+export interface AppState {
+  groceries: Groceries[];
 }
 
-const initialState: Groceries = {
+const initialState: AppState = {
+  groceries: []
 };
 
 @Injectable()
-export class AppStore extends ComponentStore<Groceries> {
+export class AppStore extends ComponentStore<AppState> {
   error = new BehaviorSubject<any>({});
 
   constructor(private apiService : ApiService) {
     super(initialState);
    }
 
-  addGrocery = this.effect<Grocery>((grocery$) =>
-  grocery$.pipe(
-    concatMap((grocery) =>
-    this.apiService.addGrocery(grocery).pipe(
-      tapResponse(
-        () => this.fetchData(),
-        (error: HttpErrorResponse) => console.error(error))
-  ))));
-
-  updateGrocery = this.effect<Grocery>((grocery$) =>
-  grocery$.pipe(
-    concatMap((grocery) =>
-    this.apiService.updateGrocery(grocery, grocery.id).pipe(
-      tapResponse(
-        () => this.fetchData(),
-        (error: HttpErrorResponse) => console.error(error)
-      )
-    ))
-  ))
-
-  deleteGrocery = this.effect<string>((groceryId$) =>
-  groceryId$.pipe(
-    concatMap((groceryId) =>
-    this.apiService.deleteGrocery(groceryId).pipe(
-      tapResponse(
-        () => this.fetchData(),
-        (error: HttpErrorResponse) => console.error(error)
-      )
-    ))
-  ))
+   setInitialLocalStorage() {
+    this.apiService.setInitialGroceries();
+   }
 
    fetchData = this.effect((dataFetch$: Observable<void>) => {
     return dataFetch$.pipe(
       switchMap(() => this.apiService.getGroceries().pipe(
         tapResponse(
-          (groceries: Grocery[]) => this.setGroceries(groceries),
+          (groceries: Groceries[]) => this.setGroceries(groceries),
           (error: HttpErrorResponse) => console.error(error)
         )
       ))
@@ -63,14 +37,12 @@ export class AppStore extends ComponentStore<Groceries> {
    });
 
    setGroceries = this.updater(
-    (state, groceries: Grocery[]) => ({...state, groceries})
+    (state, groceries: Groceries[]) => ({...state, groceries})
    );
 
-   getGroceries = (category: string): Observable<Grocery[] | undefined> => {
-    return this.select(
-      state => state.groceries
-    ).pipe(map((groceries) => {
-      return groceries?.filter(grocery => grocery.category === category)
-    }))
+   getGroceries = (): Observable<Groceries[]> => {
+    return this.select(state => state.groceries);
    }
+
+
 }

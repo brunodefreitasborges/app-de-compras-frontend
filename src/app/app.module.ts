@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppStore } from './store/app.store';
 import { NetworkInterceptor } from './services/network.interceptor';
 import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
+import { HomeComponent } from './home/home.component';
+import { GroceryListComponent } from './components/grocery-list/grocery-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { DialogFormComponent } from './components/dialog-form/dialog-form.compon
     HeaderComponent,
     GroceryItemComponent,
     DialogFormComponent,
+    HomeComponent,
+    GroceryListComponent,
   ],
   imports: [
     MaterialModule,

@@ -1,0 +1,12 @@
+<mat-accordion multi="false" fxLayout="column" fxLayoutGap="0px" >
+
+  <app-grocery-list *ngFor="let grocery of groceries$ | async"
+  [category]="grocery.category"
+  [groceries]="grocery.groceries"
+  ></app-grocery-list>
+  
+</mat-accordion>
+
+<button class="add-button" mat-mini-fab color="primary" (click)="add()">
+  <mat-icon>add</mat-icon>
+</button>

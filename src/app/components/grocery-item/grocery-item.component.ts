@@ -20,12 +20,7 @@ import { Grocery } from 'src/app/models/grocery-model';
   ]
 })
 export class GroceryItemComponent implements OnInit {
-  @Input() id!: string;
-  @Input() category!: string;
-  @Input() product!: string;
-  @Input() quantity!: number;
-  @Input() price: number = 0.00
-  @Input() checked!: boolean;
+  @Input() grocery!: Grocery;
 
   @Output() onEdit: EventEmitter<Grocery> = new EventEmitter();
   @Output() onDelete: EventEmitter<string> = new EventEmitter();
@@ -36,9 +31,9 @@ export class GroceryItemComponent implements OnInit {
   constructor() {}
 
    ngOnInit(): void {
-    if (this.checked) {
+    if (this.grocery.checked) {
       this.checkIcon = 'done'
-    } else if (!this.checked) {
+    } else if (!this.grocery.checked) {
       this.checkIcon = 'radio_button_unchecked'
     }
    }
@@ -46,12 +41,12 @@ export class GroceryItemComponent implements OnInit {
 
   edit() {
     this.onEdit.emit({
-      id: this.id,
-      category: this.category,
-      product: this.product,
-      quantity: this.quantity,
-      price: this.price,
-      checked: this.checked
+      id: this.grocery.id,
+      category: this.grocery.category,
+      product: this.grocery.product,
+      quantity: this.grocery.quantity,
+      price: this.grocery.price,
+      checked: this.grocery.checked
     });
   }
 
@@ -60,22 +55,22 @@ export class GroceryItemComponent implements OnInit {
   }
 
   getAnimationStateName() {
-    return this.checked ? 'checked' : 'unchecked';
+    return this.grocery.checked ? 'checked' : 'unchecked';
   }
 
   toggleChecked() {
-    this.checked = !this.checked;
+    this.grocery.checked = !this.grocery.checked;
     this.onCheck.emit({
-      id: this.id,
-      category: this.category,
-      product: this.product,
-      quantity: this.quantity,
-      price: this.price,
-      checked: this.checked
+      id: this.grocery.id,
+      category: this.grocery.category,
+      product: this.grocery.product,
+      quantity: this.grocery.quantity,
+      price: this.grocery.price,
+      checked: this.grocery.checked
     });
-    if (this.checked) {
+    if (this.grocery.checked) {
       this.checkIcon = 'done'
-    } else if (!this.checked) {
+    } else if (!this.grocery.checked) {
       this.checkIcon = 'radio_button_unchecked'
     }
   }

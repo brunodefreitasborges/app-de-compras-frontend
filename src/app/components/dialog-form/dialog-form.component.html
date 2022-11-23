@@ -3,10 +3,11 @@
     <mat-form-field appearance="outline">
       <mat-label>Categoria</mat-label>
       <mat-select formControlName="category">
-        <mat-option value="hortifruti">Hortifruti</mat-option>
-        <mat-option value="limpeza">Limpeza</mat-option>
-        <mat-option value="mercearia">Mercearia</mat-option>
-        <mat-option value="acougue">Açougue</mat-option>
+        <mat-option
+        *ngFor="let category of data.categories"
+          value="{{category}}">
+          {{category.charAt(0).toUpperCase() + category.slice(1)}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
     <div *ngIf="category.invalid && formDir.submitted" class="validation-error">

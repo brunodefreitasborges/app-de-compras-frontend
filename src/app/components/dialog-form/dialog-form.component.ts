@@ -17,10 +17,10 @@ export class DialogFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogForm = new FormGroup({
-      category: new FormControl(this.data.category, [Validators.required]),
-      product: new FormControl(this.data.product, [Validators.required]),
-      quantity: new FormControl(this.data.quantity, [Validators.required]),
-      price: new FormControl(this.data.price),
+      category: new FormControl(this.data.grocery.category, [Validators.required]),
+      product: new FormControl(this.data.grocery.product, [Validators.required]),
+      quantity: new FormControl(this.data.grocery.quantity, [Validators.required]),
+      price: new FormControl(this.data.grocery.price),
     })
   }
 
@@ -41,7 +41,7 @@ export class DialogFormComponent implements OnInit {
   }
 
   cancel(): void {
-  
+
     this.dialogRef.close();
   }
 
@@ -52,12 +52,12 @@ export class DialogFormComponent implements OnInit {
     let result: Object = {
       flag: this.data.flag,
       data : {
-        id: this.data.id,
+        id: this.data.grocery.id,
         category: this.dialogForm.value.category,
         product: this.dialogForm.value.product,
         quantity: this.dialogForm.value.quantity,
         price: this.dialogForm.value.price,
-        checked: this.data.checked
+        checked: this.data.grocery.checked
       }
     }
     this.dialogRef.close(result);

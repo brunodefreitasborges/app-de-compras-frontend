@@ -1,11 +1,6 @@
-
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Observable} from 'rxjs';
-import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
-import { Grocery } from './models/grocery-model';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { LoadingService } from './services/loading.service';
-import { AppStore } from './store/app.store';
+
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -13,91 +8,14 @@ import { AppStore } from './store/app.store';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'My Groceries';
   loading$ = this.loader.loading$;
   showSideNav!: boolean;
-  hortifruti$!: Observable<Grocery[] | undefined>;
-  mercearia$!: Observable<Grocery[]  | undefined>;
-  limpeza$!: Observable<Grocery[] | undefined>;
-  acougue$!: Observable<Grocery[] | undefined>;
-
-  showAcougue: boolean = true;
 
 
   constructor(
-    private store: AppStore,
-    private loader: LoadingService,
-    public dialog: MatDialog) {
-  }
-
-  ngOnInit(): void {
-    this.store.fetchData();
-    this.hortifruti$ = this.store.getGroceries('hortifruti');
-    this.mercearia$ = this.store.getGroceries('mercearia');
-    this.limpeza$ = this.store.getGroceries('limpeza');
-    this.acougue$ = this.store.getGroceries('acougue');
-  }
-
-  // Dialog Logic
-  openDialog(flag: string, grocery: Grocery): void {
-    const dialogRef = this.dialog.open(DialogFormComponent, {
-      disableClose: true,
-      width: '250px',
-      data: {
-        flag: flag,
-        id: grocery.id,
-        category: grocery.category,
-        product: grocery.product,
-        quantity: grocery.quantity,
-        price: grocery.price,
-        checked: grocery.checked
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result === undefined) {
-        return;
-      } else {
-        if(result.flag === 'create') {
-          this.onAddGrocery(result.data);
-        } else if(result.flag === 'update') {
-          this.onUpdateGrocery(result.data);
-        }
-      }
-    });
-  }
-
-  // Store Manipulation Logic
-  add() {
-    this.openDialog('create', {
-      id: '',
-      category: '',
-      product: '',
-      quantity: 0,
-      price: 0,
-      checked: false
-    });
-  }
-
-  edit(grocery: Grocery) {
-    this.openDialog('update', grocery)
-   }
-
-  onAddGrocery(grocery: Grocery) {
-    this.store.addGrocery(grocery)
-  }
-
-  onUpdateGrocery(grocery: Grocery) {
-    this.store.updateGrocery(grocery);
-  }
-
-  onDelete(groceryId: string) {
-    this.store.deleteGrocery(groceryId);
-  }
-
-  checked(grocery: Grocery) {
-    this.store.updateGrocery(grocery);
+    private loader: LoadingService) {
   }
 
   // Side Nav Logic

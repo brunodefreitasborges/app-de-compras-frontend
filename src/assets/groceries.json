@@ -1,0 +1,126 @@
+[
+  {
+    "category": "padaria",
+    "groceries": [
+      {
+        "id": "1",
+        "category": "padaria",
+        "product": "bread",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+      {
+        "id": "2",
+        "category": "padaria",
+        "product": "milk",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      }
+    ]
+  },
+  {
+    "category": "mercearia",
+    "groceries": [
+      {
+        "id": "3",
+        "category": "mercearia",
+        "product": "eggs",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "4",
+        "category": "mercearia",
+        "product": "butter",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      }
+    ]
+  },
+  {
+    "category": "carnes",
+    "groceries": [
+      {
+        "id": "5",
+        "category": "carnes",
+        "product": "cheese",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "6",
+        "category": "carnes",
+        "product": "chicken",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "7",
+        "category": "carnes",
+        "product": "beef",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "8",
+        "category": "carnes",
+        "product": "pork",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "9",
+        "category": "carnes",
+        "product": "fish",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      }
+    ]
+  },
+  {
+    "category": "bebidas",
+    "groceries": [
+      {
+        "id": "5",
+        "category": "bebidas",
+        "product": "coca cola",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "6",
+        "category": "bebidas",
+        "product": "limonetto",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      },
+
+      {
+        "id": "7",
+        "category": "bebidas",
+        "product": "stella",
+        "quantity": 1,
+        "price": 1.5,
+        "checked": false
+      }
+    ]
+  }
+
+]

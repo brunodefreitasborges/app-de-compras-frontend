@@ -1,3 +1,9 @@
+
+export interface Groceries {
+  category: string,
+  groceries: Grocery[];
+}
+
 export interface Grocery {
   id: string,
   category: string,
