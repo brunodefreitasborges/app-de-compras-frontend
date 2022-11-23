@@ -1,4 +1,4 @@
-import { DialogErrorComponent } from './components/dialog-error/dialog-error.component';
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable} from 'rxjs';
@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
 
   showAcougue: boolean = true;
 
-  errors: [{}] = [{}];
 
   constructor(
     private store: AppStore,
@@ -38,11 +37,6 @@ export class AppComponent implements OnInit {
     this.mercearia$ = this.store.getGroceries('mercearia');
     this.limpeza$ = this.store.getGroceries('limpeza');
     this.acougue$ = this.store.getGroceries('acougue');
-    this.store.error.subscribe(error => {
-      this.errors.pop();
-      this.errors.push(error);
-    });
-    console.log(this.errors)
   }
 
   // Dialog Logic
@@ -72,10 +66,6 @@ export class AppComponent implements OnInit {
         }
       }
     });
-  }
-
-  openErrorDialog(): void {
-    const dialogRef = this.dialog.open(DialogErrorComponent)
   }
 
   // Store Manipulation Logic

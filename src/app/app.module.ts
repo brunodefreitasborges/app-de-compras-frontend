@@ -13,7 +13,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppStore } from './store/app.store';
 import { NetworkInterceptor } from './services/network.interceptor';
 import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
-import { DialogErrorComponent } from './components/dialog-error/dialog-error.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { DialogErrorComponent } from './components/dialog-error/dialog-error.com
     HeaderComponent,
     GroceryItemComponent,
     DialogFormComponent,
-    DialogErrorComponent,
   ],
   imports: [
     MaterialModule,
