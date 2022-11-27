@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.store.setInitialLocalStorage();
     this.store.fetchData();
   }
 
@@ -75,7 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   // Store Manipulation Logic
    addGrocery(grocery: Grocery) {
-  
+
 
    }
 

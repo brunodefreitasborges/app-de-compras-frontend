@@ -21,9 +21,6 @@ export class AppStore extends ComponentStore<AppState> {
     super(initialState);
    }
 
-   setInitialLocalStorage() {
-    this.apiService.setInitialGroceries();
-   }
 
    fetchData = this.effect((dataFetch$: Observable<void>) => {
     return dataFetch$.pipe(
