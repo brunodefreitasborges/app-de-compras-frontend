@@ -2,22 +2,15 @@
 <mat-card
 [@checkedState]="grocery.checked ? 'checked' : 'unchecked'"
 [id]="grocery.id"
-class="grocery-item"
-fxLayoutAlign="space-between center">
+class="flex justify-between items-center shadow-none h-12"
+>
 
-  <div
-    class="left"
-    fxFlex="0%"
-    fxLayoutAlign="start center"
-    fxLayoutGap="16px"
-    (click)="toggleChecked()">
+  <div class="left flex align-middle" (click)="toggleChecked()">
     <mat-icon
-
-    color="primary"
-    class="grocery-item-icon">
+    color="primary">
     {{ checkIcon }}
   </mat-icon>
-    <span [ngClass]="grocery.checked ? 'checked-text' : ''">
+    <span class="mt-0.5 ml-2" [ngClass]="{'line-through': grocery.checked}">
       {{ grocery.product.charAt(0).toUpperCase() + grocery.product.slice(1) }} - {{ grocery.quantity }}
     </span>
   </div>

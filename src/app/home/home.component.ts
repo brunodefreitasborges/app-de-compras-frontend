@@ -12,7 +12,7 @@ import { AppStore } from '../store/app.store';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   groceries$ = this.store.getGroceries();
-  categories: string[] = [];
+  categories: string[] | undefined = [];
 
   constructor(
     private store: AppStore,
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.groceries$.subscribe(groceries => {
-      this.categories = groceries.map(grocery => grocery.category);
+      this.categories = groceries?.map(grocery => grocery.category);
       this.categories = [...new Set(this.categories)];
     });
   }
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
   // Dialog Logic
-  openDialog(flag: string, categories: string[], grocery: Grocery): void {
+  openDialog(flag: string, categories: string[] | undefined, grocery: Grocery): void {
     const dialogRef = this.dialog.open(DialogFormComponent, {
       disableClose: true,
       width: '250px',

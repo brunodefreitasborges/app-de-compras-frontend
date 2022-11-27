@@ -1,15 +1,15 @@
-
-  <mat-expansion-panel>
+<mat-expansion-panel class="mb-0 mt-0">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon>spa</mat-icon>
+        <mat-icon class="mr-4">spa</mat-icon>
         {{ category.charAt(0).toUpperCase() + category.slice(1) }}
       </mat-panel-title>
     </mat-expansion-panel-header>
-          <app-grocery-item *ngFor="let grocery of groceries"
+          <app-grocery-item
+          *ngFor="let grocery of groceries"
           [grocery]="grocery">
           </app-grocery-item>
           <mat-divider></mat-divider>
-  </mat-expansion-panel>
+</mat-expansion-panel>
 
 

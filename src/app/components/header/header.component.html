@@ -1,11 +1,11 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar color="primary" class="w-screen flex justify-between">
 
-  <div class="logo" fxLayoutAlign="center center">
-    <img src="../../../assets/newLogo.png">
+  <div class="bg-contain bg-no-repeat h-8 w-48" style="background-image: url(../../../assets/newLogo.png);">
   </div>
-  <div class="menu-btn" fxLayoutAlign="center center">
-    <mat-icon (click)="toggleSideNav()">menu</mat-icon>
-</div>
+
+  <div class="menu-mobile hidden max-mobile:block">
+    <mat-icon class="py-1" (click)="toggleSideNav()">menu</mat-icon>
+  </div>
 
 </mat-toolbar>
 

@@ -12,12 +12,9 @@ export class ApiService {
   constructor(private http: HttpClient) {
    }
 
-  getGroceries(): Observable<Groceries[]> {
+  getGroceries(): Observable<GroceryList[]> {
 
-    return this.http.get<GroceryList[]>('http://localhost:8080/api/v1').pipe(
-      map((groceryList: GroceryList[]) => {
-        return groceryList[0].groceryList;
-      }
-    )
-  )}
+    return this.http.get<GroceryList[]>('http://localhost:8080/api/v1');
+  }
+
 }

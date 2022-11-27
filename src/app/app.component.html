@@ -1,10 +1,15 @@
 <div class="app-container">
   <app-header (showSideNav)="toggleSideNav()"></app-header>
-    <mat-sidenav-container  (backdropClick)="toggleSideNav()">
-      <mat-sidenav autoFocus="false" mode="push" [opened]="showSideNav">
+    <mat-sidenav-container class="h-screen"  (backdropClick)="toggleSideNav()">
+      <mat-sidenav class="bg-primary w-1/2" autoFocus="false" mode="push" [opened]="showSideNav">
         <div fxLayout="column" fxLayoutGap="-16px">
-          <ul class="sidenav-list">
-            <li><a href="#">LADO ESQUERDO</a></li>
+          <h3 class="text-md text-white mt-4 ml-4">Minhas Listas</h3>
+          <ul class="ml-4 text-white mt-8">
+            <li
+            class="text-xs hover:underline mb-4"
+            *ngFor="let list of lists$ | async">
+            <a href="#">{{ list }}</a>
+            </li>
           </ul>
         </div>
       </mat-sidenav>
