@@ -1,8 +1,8 @@
 
 export interface GroceryList {
-  id: string;
+  id?: string;
   listName: string;
-  groceryList: Groceries[]
+  groceryList?: Groceries[]
 }
 
 export interface Groceries {

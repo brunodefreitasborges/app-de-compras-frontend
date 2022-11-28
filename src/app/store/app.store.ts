@@ -6,7 +6,7 @@ import { BehaviorSubject, map, Observable, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface AppState {
-  currentList: String,
+  currentList: string,
   groceries: GroceryList[];
 }
 
@@ -41,8 +41,12 @@ export class AppStore extends ComponentStore<AppState> {
     (state, groceries: GroceryList[]) => ({...state, groceries})
    );
 
+   updateGroceries = this.updater(
+    (state, grocerieList: GroceryList) => ({...state, groceries: [...state.groceries, grocerieList]})
+   );
+
    setCurrentList = this.updater(
-    (state, currentList: String) => ({...state, currentList})
+    (state, currentList: string) => ({...state, currentList})
    );
 
    // Get the groceries for the current selected list
@@ -51,10 +55,38 @@ export class AppStore extends ComponentStore<AppState> {
       this.state$,
       (state) => state.groceries.find(list => list.listName === state.currentList)?.groceryList
     );
-
    }
 
-   getLists = (): Observable<String[]> => {
+   getLists = (): Observable<string[]> => {
     return this.select(state => state.groceries.map(grocery => grocery.listName));
    }
+
+   addList = this.effect((list$: Observable<string>) => {
+    return list$.pipe(
+      switchMap((list) => this.apiService.addList(list).pipe(
+        tapResponse(
+          (groceries: GroceryList) => {
+            this.updateGroceries(groceries)
+          },
+          (error: HttpErrorResponse) => console.error(error)
+        )
+      ))
+    )
+   });
+
+   removeList = this.effect((list$: Observable<string>) => {
+    return list$.pipe(
+      switchMap((list) => this.apiService.deleteList(list).pipe(
+        tapResponse(
+          () => {
+            this.setState(
+              (state) => ({...state, groceries: state.groceries.filter(grocery => grocery.listName != list)})
+            );
+            this.select(state => state.groceries).subscribe(data => console.log(data));
+          },
+          (error: HttpErrorResponse) => console.error(error)
+        )
+      ))
+    )
+   });
 }

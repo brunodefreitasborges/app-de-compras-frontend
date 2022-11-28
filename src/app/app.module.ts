@@ -15,6 +15,7 @@ import { NetworkInterceptor } from './services/network.interceptor';
 import { DialogFormComponent } from './components/dialog-form/dialog-form.component';
 import { HomeComponent } from './home/home.component';
 import { GroceryListComponent } from './components/grocery-list/grocery-list.component';
+import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { GroceryListComponent } from './components/grocery-list/grocery-list.com
     DialogFormComponent,
     HomeComponent,
     GroceryListComponent,
+    AddListDialogComponent,
   ],
   imports: [
     MaterialModule,
