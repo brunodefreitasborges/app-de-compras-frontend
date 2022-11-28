@@ -20,13 +20,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.store.fetchData();
+    
   }
 
   ngAfterViewInit(): void {
     this.groceries$.subscribe(groceries => {
       this.categories = groceries?.map(grocery => grocery.category);
-      this.categories = [...new Set(this.categories)];
     });
   }
 

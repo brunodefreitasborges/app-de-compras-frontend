@@ -23,14 +23,12 @@ export class AppStore extends ComponentStore<AppState> {
     super(initialState);
    }
 
-
    fetchData = this.effect((dataFetch$: Observable<void>) => {
     return dataFetch$.pipe(
       switchMap(() => this.apiService.getGroceries().pipe(
         tapResponse(
           (groceries: GroceryList[]) => {
-            this.setGroceries(groceries),
-            this.setCurrentList(groceries[0].listName)
+            this.setGroceries(groceries)
           },
 
           (error: HttpErrorResponse) => console.error(error)

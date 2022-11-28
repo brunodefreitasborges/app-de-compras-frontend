@@ -1,4 +1,13 @@
-<mat-accordion multi="false" fxLayout="column" fxLayoutGap="0px" >
+<h3 *ngIf="categories == undefined"
+class="text-xl mt-8 ml-4">
+<mat-icon class="text-black align-middle text-4xl h-8 w-8 -mt-2">arrow_left</mat-icon>
+Selecione uma lista no menu.</h3>
+
+<h3 *ngIf="categories?.length == 0"
+class="text-xl  text-center mt-8">Sua lista está vazia.</h3>
+
+
+<mat-accordion multi="false">
 
   <app-grocery-list *ngFor="let grocery of groceries$ | async"
   [category]="grocery.category"

@@ -1,14 +1,14 @@
 <div class="app-container">
   <app-header (showSideNav)="toggleSideNav()"></app-header>
     <mat-sidenav-container class="h-screen"  (backdropClick)="toggleSideNav()">
-      <mat-sidenav class="bg-primary w-1/2" autoFocus="false" mode="push" [opened]="showSideNav">
-        <div fxLayout="column" fxLayoutGap="-16px">
-          <h3 class="text-md text-white mt-4 ml-4">Minhas Listas</h3>
-          <ul class="ml-4 text-white mt-8">
+      <mat-sidenav class="bg-white w-1/2" autoFocus="false" mode="push" [opened]="showSideNav">
+        <div>
+          <h3 class="text-md text-black mt-6 ml-4">Minhas Listas</h3>
+          <ul class="ml-4 text-black mt-4">
             <li
-            class="text-xs hover:underline mb-4"
+            class="text-sm hover:underline mb-4"
             *ngFor="let list of lists$ | async">
-            <a href="#">{{ list }}</a>
+            <a href="#" (click)="selectList(list)">{{ list }}</a>
             </li>
           </ul>
         </div>
