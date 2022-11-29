@@ -8,7 +8,10 @@
     </mat-expansion-panel-header>
           <app-grocery-item
           *ngFor="let grocery of groceries"
-          [grocery]="grocery">
+          [grocery]="grocery"
+          (onEdit)="onEdit($event)"
+          (onDelete)="onDelete($event)"
+          >
           </app-grocery-item>
           <mat-divider></mat-divider>
 </mat-expansion-panel>

@@ -23,7 +23,7 @@ export class GroceryItemComponent implements OnInit {
   @Input() grocery!: Grocery;
 
   @Output() onEdit: EventEmitter<Grocery> = new EventEmitter();
-  @Output() onDelete: EventEmitter<string> = new EventEmitter();
+  @Output() onDelete: EventEmitter<Grocery> = new EventEmitter();
   @Output() onCheck: EventEmitter<Grocery> = new EventEmitter();
 
   checkIcon!: string;
@@ -41,7 +41,6 @@ export class GroceryItemComponent implements OnInit {
 
   edit() {
     this.onEdit.emit({
-      id: this.grocery.id,
       category: this.grocery.category,
       product: this.grocery.product,
       quantity: this.grocery.quantity,
@@ -51,7 +50,13 @@ export class GroceryItemComponent implements OnInit {
   }
 
   delete() {
-    this.onDelete.emit();
+    this.onDelete.emit({
+      category: this.grocery.category,
+      product: this.grocery.product,
+      quantity: this.grocery.quantity,
+      price: this.grocery.price,
+      checked: this.grocery.checked
+    });
   }
 
   getAnimationStateName() {
@@ -61,7 +66,6 @@ export class GroceryItemComponent implements OnInit {
   toggleChecked() {
     this.grocery.checked = !this.grocery.checked;
     this.onCheck.emit({
-      id: this.grocery.id,
       category: this.grocery.category,
       product: this.grocery.product,
       quantity: this.grocery.quantity,
