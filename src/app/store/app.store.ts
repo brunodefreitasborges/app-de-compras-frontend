@@ -17,10 +17,11 @@ const initialState: AppState = {
 
 @Injectable()
 export class AppStore extends ComponentStore<AppState> {
-  error = new BehaviorSubject<any>({});
+  currentListId: string = '';
 
   constructor(private apiService : ApiService) {
     super(initialState);
+    this.setCurrentListId;
    }
 
    fetchData = this.effect((dataFetch$: Observable<void>) => {
@@ -42,11 +43,7 @@ export class AppStore extends ComponentStore<AppState> {
    );
 
    updateGroceries = this.updater(
-    (state, grocerieList: GroceryList) => ({...state, groceries: [...state.groceries, grocerieList]})
-   );
-
-   setCurrentList = this.updater(
-    (state, currentList: string) => ({...state, currentList})
+    (state, groceryList: GroceryList) => ({...state, groceries: [...state.groceries, groceryList]})
    );
 
    // Get the groceries for the current selected list
@@ -55,7 +52,66 @@ export class AppStore extends ComponentStore<AppState> {
       this.state$,
       (state) => state.groceries.find(list => list.listName === state.currentList)?.groceryList
     );
-   }
+   };
+
+   addGrocery = this.effect((grocery$: Observable<Grocery>) => {
+    return grocery$.pipe(
+      switchMap((grocery: Grocery) => this.apiService.addGrocery(grocery, this.currentListId).pipe(
+        tapResponse(
+          (groceryList: GroceryList) => {
+            this.setState(state => {
+              return {
+                ...state,
+                groceries: [...state.groceries.filter(list => list.listName !== groceryList.listName), groceryList]
+              }
+            });
+          },
+          (error: HttpErrorResponse) => console.error(error)
+        )
+      ))
+    )
+   });
+
+   updateGrocery = this.effect((grocery$: Observable<Grocery>) => {
+    return grocery$.pipe(
+      switchMap((grocery: Grocery) => this.apiService.updateGrocery(grocery, this.currentListId).pipe(
+        tapResponse(
+          (groceryList: GroceryList) => {
+            this.setState(state => {
+              return {
+                ...state,
+                groceries: [...state.groceries.filter(list => list.listName !== groceryList.listName), groceryList]
+              }
+            });
+          },
+          (error: HttpErrorResponse) => console.error(error)
+        )
+      ))
+    )
+   });
+
+   deleteGrocery = this.effect((grocery$: Observable<Grocery>) => {
+    return grocery$.pipe(
+      switchMap((grocery: Grocery) => this.apiService.deleteGrocery(grocery, this.currentListId).pipe(
+        tapResponse(
+          () => {
+           this.fetchData()
+          },
+          (error: HttpErrorResponse) => console.error(error)
+        )
+      ))
+    )
+   });
+
+   setCurrentList =  this.updater(
+    (state, currentList: string) => ({...state, currentList})
+   );
+
+   setCurrentListId = this.select(
+    (state) => state.groceries.find(list => list.listName === state.currentList)?.id
+   ).subscribe((id) => {
+    this.currentListId = id!;
+  });
 
    getLists = (): Observable<string[]> => {
     return this.select(state => state.groceries.map(grocery => grocery.listName));
@@ -82,7 +138,6 @@ export class AppStore extends ComponentStore<AppState> {
             this.setState(
               (state) => ({...state, groceries: state.groceries.filter(grocery => grocery.listName != list)})
             );
-            this.select(state => state.groceries).subscribe(data => console.log(data));
           },
           (error: HttpErrorResponse) => console.error(error)
         )

@@ -52,7 +52,6 @@ export class DialogFormComponent implements OnInit {
     let result: Object = {
       flag: this.data.flag,
       data : {
-        id: this.data.grocery.id,
         category: this.dialogForm.value.category,
         product: this.dialogForm.value.product,
         quantity: this.dialogForm.value.quantity,

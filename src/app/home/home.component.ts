@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -49,16 +49,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if(result === undefined) {
         return;
       } else {
-        this.addGrocery(result.data.grocery);
-      }
-    });
+        if(result.flag === 'create') {
+          this.addGrocery(result.data);
+        } else if(result.flag === 'update') {
+          this.updateGrocery(result.data);
+        }
+    }});
+
   }
 
   add() {
     this.openDialog('create',
     this.categories,
     {
-      id: '',
       category: '',
       product: '',
       quantity: 0,
@@ -72,12 +75,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
    }
 
   // Store Manipulation Logic
-   addGrocery(grocery: Grocery) {
-
-
+  addGrocery(grocery: Grocery) {
+    this.store.addGrocery(grocery);
    }
 
+  updateGrocery(grocery: Grocery) {
+    this.store.updateGrocery(grocery);
+   }
 
+  deleteGrocery(grocery: Grocery) {
+   this.store.deleteGrocery(grocery);
 
-
+  }
 }

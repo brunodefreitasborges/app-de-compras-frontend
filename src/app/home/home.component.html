@@ -12,10 +12,12 @@ class="text-xl  text-center mt-8">Sua lista está vazia.</h3>
   <app-grocery-list *ngFor="let grocery of groceries$ | async"
   [category]="grocery.category"
   [groceries]="grocery.groceries"
+  (edit)="edit($event)"
+  (delete)="deleteGrocery($event)"
   ></app-grocery-list>
 
 </mat-accordion>
 
-<button class="add-button fixed bottom-4 right-4" mat-mini-fab color="primary" (click)="add()">
+<button *ngIf="categories != undefined" class="add-button fixed bottom-4 right-4" mat-mini-fab color="primary" (click)="add()">
   <mat-icon>add</mat-icon>
 </button>
