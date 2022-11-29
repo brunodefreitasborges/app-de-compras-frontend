@@ -1,35 +1,35 @@
-<div class="app-container">
+<div class="app-container h-screen">
   <app-header (showSideNav)="toggleSideNav()"></app-header>
-    <mat-sidenav-container class="h-screen"  (backdropClick)="toggleSideNav()">
+  <mat-sidenav-container class="h-[93%]"  (backdropClick)="toggleSideNav()">
       <mat-sidenav class="bg-primary w-1/2" autoFocus="false" mode="push" [opened]="showSideNav">
-        <div>
-          <h3 class="text-lg text-white mt-6 ml-4">Minhas Listas</h3>
-          <ul class="ml-4 text-white mt-4">
-            <li
-            class="text-sm hover:underline mb-4 transition-all"
-            [ngClass]="{'text-accent ml-2': selectedList == list}"
-            *ngFor="let list of lists$ | async">
-            <a href="#" (click)="selectList(list)">{{ list }}</a>
-            </li>
-          </ul>
+        <div class="h-full flex flex-col justify-between pt-8">
+          <div class="ml-4">
+            <h3 class="text-lg text-white">Minhas Listas</h3>
+            <ul class="text-white">
+              <li
+              class="text-sm hover:underline transition-all"
+              [ngClass]="{'text-accent ml-4': selectedList == list}"
+              *ngFor="let list of lists$ | async">
+              <a href="#" (click)="selectList(list)">{{ list }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-wrap justify-center items-center space-y-2 pb-8 w-full">
+            <div class="flex space-x-1 justify-center items-center">
+              <button *ngIf="selectedList != loadedList"
+              mat-raised-button color="primary"
+              (click)="loadList()"
+              class="font-inter text-white text-md pt-1 pb-1 w-[48%]">Carregar</button>
+              <button *ngIf="selectedList"
+              mat-raised-button color="warn"
+              (click)="removeList()"
+              class="font-inter text-black text-md pt-1 pb-1 w-[48%] flex-grow">Remover</button>
+            </div>
+            <button mat-raised-button color="accent"
+            (click)="addList()"
+            class="font-inter text-primary text-md pt-1 pb-1 w-[96%]">Nova Lista</button>
+          </div>
         </div>
-
-
-        <button *ngIf="selectedList != loadedList"
-        mat-raised-button color="primary"
-        (click)="loadList()"
-        class="font-inter text-white fixed w-40 bottom-28 ml-3 text-md pt-1 pb-1">Carregar Lista</button>
-
-
-        <button *ngIf="selectedList"
-        mat-raised-button color="warn"
-        (click)="removeList()"
-        class="font-inter text-black fixed w-40 bottom-16 ml-3 text-md pt-1 pb-1">Remover Lista</button>
-
-
-        <button mat-raised-button color="accent"
-        (click)="addList()"
-        class="font-inter text-primary fixed w-40 bottom-4 ml-3 text-md pt-1 pb-1">Nova Lista</button>
 
 
       </mat-sidenav>

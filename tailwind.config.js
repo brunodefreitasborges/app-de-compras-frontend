@@ -21,10 +21,10 @@ module.exports = {
         warn: {
           DEFAULT: '#F44336'
         }
-      },
-      fontFamily: {
-        'inter': ['Inter', 'sans-serif']
       }
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
     }
 
   },
