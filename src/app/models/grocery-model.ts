@@ -18,3 +18,9 @@ export interface Grocery {
   checked: boolean
 }
 
+
+export interface GroceryStyle {
+  color: string,
+  icon: string
+}
+

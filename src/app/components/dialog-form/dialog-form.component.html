@@ -3,11 +3,16 @@
     <mat-form-field appearance="outline">
       <mat-label>Categoria</mat-label>
       <mat-select formControlName="category">
-        <mat-option value="carnes">Carnes</mat-option>
+        <mat-option value="padaria">Padaria</mat-option>
+        <mat-option value="cereais_e_graos">Cereais e Grãos</mat-option>
+        <mat-option value="enlatados">Enlatados</mat-option>
+        <mat-option value="congelados_e_frios">Congelados e Frios</mat-option>
         <mat-option value="hortifruti">Hortifruti</mat-option>
-        <mat-option value="mercearia">Mercearia</mat-option>
         <mat-option value="limpeza">Limpeza</mat-option>
         <mat-option value="higiene">Higiene</mat-option>
+        <mat-option value="bebidas">Bebidas</mat-option>
+        <mat-option value="papelaria">Papelaria</mat-option>
+        <mat-option value="outros">Outros</mat-option>
       </mat-select>
     </mat-form-field>
     <div *ngIf="category.invalid && formDir.submitted" class="validation-error">

@@ -39,7 +39,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.fetchData()
+    this.store.fetchData();
+    this.store.state$.subscribe(state => {
+      this.loadedList = state.currentList;
+      this.selectedList  = state.currentList;
+    })
   }
 
   selectList(list: string) {

@@ -5,7 +5,7 @@
         <div class="h-full flex flex-col justify-between pt-8">
           <div class="ml-4">
             <h3 class="text-lg text-white">Minhas Listas</h3>
-            <ul class="text-white">
+            <ul class="text-white space-y-2">
               <li
               class="text-sm hover:underline transition-all"
               [ngClass]="{'text-accent ml-4': selectedList == list}"
@@ -17,13 +17,13 @@
           <div class="flex flex-wrap justify-center items-center space-y-2 pb-8 w-full">
             <div class="flex space-x-1 justify-center items-center">
               <button *ngIf="selectedList != loadedList"
-              mat-raised-button color="primary"
+              mat-raised-button
               (click)="loadList()"
-              class="font-inter text-white text-md pt-1 pb-1 w-[48%]">Carregar</button>
+              class="font-inter text-white bg-green-500 text-md pt-1 pb-1 w-[48%]">Carregar</button>
               <button *ngIf="selectedList"
               mat-raised-button color="warn"
               (click)="removeList()"
-              class="font-inter text-black text-md pt-1 pb-1 w-[48%] flex-grow">Remover</button>
+              class="font-inter text-white text-md pt-1 pb-1 w-[48%] flex-grow">Remover</button>
             </div>
             <button mat-raised-button color="accent"
             (click)="addList()"

@@ -13,11 +13,17 @@ export class ApiService {
    }
 
   getGroceries(): Observable<GroceryList[]> {
-    return this.http.get<GroceryList[]>('http://localhost:8080/api/v1')
+    return this.http.get<GroceryList[]>('http://localhost:8080/api/v1',
+    {headers: new HttpHeaders({
+      "authorization": "bruno"
+    })}
+    )
   }
 
   addGrocery(grocery: Grocery, listId: string): Observable<GroceryList> {
-    return this.http.post<GroceryList>(`http://localhost:8080/api/v1/list/${listId}`, grocery)
+    return this.http.post<GroceryList>(`http://localhost:8080/api/v1/list/${listId}`, grocery, {headers: new HttpHeaders({
+      "AllowCrossOrigin": "true"
+    })})
   }
 
   updateGrocery(grocery: Grocery, listId: string): Observable<GroceryList> {

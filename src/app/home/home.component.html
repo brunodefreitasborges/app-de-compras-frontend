@@ -9,11 +9,12 @@ class="text-xl  text-center mt-8">Sua lista está vazia.</h3>
 
 <mat-accordion multi="false">
 
-  <app-grocery-list *ngFor="let grocery of groceries$ | async"
-  [category]="grocery.category"
-  [groceries]="grocery.groceries"
+  <app-grocery-list *ngFor="let groceryList of groceries$ | async; trackBy: trackByFn"
+  [category]="groceryList.category"
+  [groceries]="groceryList.groceries"
   (edit)="edit($event)"
   (delete)="deleteGrocery($event)"
+  (check)="updateGrocery($event)"
   ></app-grocery-list>
 
 </mat-accordion>

@@ -2,8 +2,13 @@
 <mat-expansion-panel class="mb-0 mt-0">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon class="mr-4">spa</mat-icon>
-        {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+        <mat-icon class="mr-4" [ngClass]="icons.get(category)?.color" >{{ icons.get(category)?.icon }}</mat-icon>
+        <div *ngIf="groceries" class=" w-full flex justify-between items-center">
+          <span>{{ capitalizeWords(category) }}</span>
+          <span class="text-gray-400 text-xs">
+          {{ groceries.length }} {{ groceries.length > 1? 'itens' : 'item' }}
+         </span>
+        </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
           <app-grocery-item
@@ -11,6 +16,7 @@
           [grocery]="grocery"
           (onEdit)="onEdit($event)"
           (onDelete)="onDelete($event)"
+          (onCheck)="onCheck($event)"
           >
           </app-grocery-item>
           <mat-divider></mat-divider>
