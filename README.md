@@ -10,7 +10,7 @@ Each list is then divided into grocery categories, into which the user can add, 
 
 ## Preview
 
-
+<a href="">![alt text](preview.PNG)</a>
 
 ## Technologies Used
 
