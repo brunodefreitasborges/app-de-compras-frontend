@@ -53,7 +53,7 @@ export class DialogFormComponent implements OnInit {
       flag: this.data.flag,
       data : {
         category: this.dialogForm.value.category,
-        product: this.dialogForm.value.product,
+        product: this.dialogForm.value.product.trim(),
         quantity: this.dialogForm.value.quantity,
         price: this.dialogForm.value.price,
         checked: this.data.grocery.checked

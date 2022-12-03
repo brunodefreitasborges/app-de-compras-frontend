@@ -60,7 +60,7 @@ export class AppStore extends ComponentStore<AppState> {
       switchMap((grocery: Grocery) => this.apiService.addGrocery(grocery, this.currentListId).pipe(
         tapResponse(
           (groceryList: GroceryList) => {
-            this.setState(state => {
+            this.patchState(state => {
               return {
                 ...state,
                 groceries: [...state.groceries.filter(list => list.listName !== groceryList.listName), groceryList]
@@ -78,7 +78,7 @@ export class AppStore extends ComponentStore<AppState> {
       switchMap((grocery: Grocery) => this.apiService.updateGrocery(grocery, this.currentListId).pipe(
         tapResponse(
           (groceryList: GroceryList) => {
-            this.setState(state => {
+            this.patchState(state => {
               return {
                 ...state,
                 groceries: [...state.groceries.filter(list => list.listName !== groceryList.listName), groceryList]
@@ -95,22 +95,11 @@ export class AppStore extends ComponentStore<AppState> {
     return grocery$.pipe(
       switchMap((grocery: Grocery) => this.apiService.deleteGrocery(grocery, this.currentListId).pipe(
         tapResponse(
-          () => {
-            //Remove the grocery from the state
-            this.setState(state => {
+          (groceryList: GroceryList) => {
+            this.patchState(state => {
               return {
                 ...state,
-                groceries: [...state.groceries.map(list => {
-                  return {
-                    listName: list.listName,
-                    groceryList: list.groceryList?.map(groceries => {
-                      return {
-                        ...groceries,
-                        groceries: groceries.groceries.filter(groceryItem => groceryItem.product !== grocery.product)
-                      }
-                    })
-                  }
-                })]
+                groceries: [...state.groceries.filter(list => list.listName !== groceryList.listName), groceryList]
               }
             });
           },
