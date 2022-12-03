@@ -1,0 +1,96 @@
+[
+	{
+		"id": "6383724af29d6a104096fb72",
+		"listName": "Atacado - Novembro",
+		"groceryList": [
+			{
+				"category": "carnes",
+				"groceries": [
+					{
+						"category": "carnes",
+						"product": "Frango Sassami",
+						"price": 0.0,
+						"quantity": 1,
+						"checked": false
+					},
+					{
+						"category": "carnes",
+						"product": "Carne Moída",
+						"price": 0.0,
+						"quantity": 3,
+						"checked": false
+					}
+				]
+			},
+			{
+				"category": "mercearia",
+				"groceries": [
+					{
+						"category": "mercearia",
+						"product": "Ovos",
+						"price": 0.0,
+						"quantity": 20,
+						"checked": false
+					},
+					{
+						"category": "mercearia",
+						"product": "Cacetinho",
+						"price": 0.0,
+						"quantity": 8,
+						"checked": false
+					}
+				]
+			},
+			{
+				"category": "limpeza",
+				"groceries": [
+					{
+						"category": "limpeza",
+						"product": "Pinho Sol",
+						"price": 0.0,
+						"quantity": 1,
+						"checked": false
+					},
+					{
+						"category": "limpeza",
+						"product": "Amaciante",
+						"price": 0.0,
+						"quantity": 1,
+						"checked": false
+					},
+					{
+						"category": "limpeza",
+						"product": "Sabão Líquido",
+						"price": 0.0,
+						"quantity": 1,
+						"checked": false
+					}
+				]
+			},
+			{
+				"category": "higiene",
+				"groceries": [
+					{
+						"category": "higiene",
+						"product": "Papel Higiênico",
+						"price": 0.0,
+						"quantity": 1,
+						"checked": false
+					},
+					{
+						"category": "higiene",
+						"product": "Pasta de Dente",
+						"price": 0.0,
+						"quantity": 4,
+						"checked": false
+					}
+				]
+			}
+		]
+	},
+	{
+		"id": "6384fe75bfeead19a03dd2a0",
+		"listName": "Atacado - Dezembro",
+		"groceryList": []
+	}
+]

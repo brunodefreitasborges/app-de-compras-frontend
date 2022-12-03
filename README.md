@@ -1,27 +1,33 @@
-# Frontend
+# My Groceries Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+The purpose of this project is to better understand and practice the Angular Framework and it's functionalities.
 
-## Development server
+It works as a mobile app, viewed in the browser.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The user can add or remove grocery lists and alternate between them.
 
-## Code scaffolding
+Each list is then divided into grocery categories, into which the user can add, remove or update any number of grocery items.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Preview
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Technologies Used
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Typescript
+Angular 14
+NgRx (Component Store)
+TailwindCSS
 
-## Running end-to-end tests
+## How to run
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+First, you need a backend running on port 8080. I made one in Java with Spring Boot for this project, but you can create one in any technology you like. 
+The Java backend is in my github too.
 
-## Further help
+I include a example-data.json file in which you can check the exact format the app expects.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Run 'npm i' to install dependencies. 
+
+Finally, serve the app with 'ng serve'.
+
+
