@@ -38,6 +38,9 @@ export class GroceryItemComponent implements OnInit {
     }
    }
 
+  getAnimationStateName() {
+    return this.grocery.checked ? 'checked' : 'unchecked';
+  }
 
   edit() {
     this.onEdit.emit({
@@ -59,19 +62,18 @@ export class GroceryItemComponent implements OnInit {
     });
   }
 
-  getAnimationStateName() {
-    return this.grocery.checked ? 'checked' : 'unchecked';
-  }
-
   toggleChecked() {
     this.grocery.checked = !this.grocery.checked;
-    this.onCheck.emit({
-      category: this.grocery.category,
-      product: this.grocery.product,
-      quantity: this.grocery.quantity,
-      price: this.grocery.price,
-      checked: this.grocery.checked
-    });
+    async () => {
+      await new Promise(resolve => setTimeout(resolve, 200));
+      this.onCheck.emit({
+        category: this.grocery.category,
+        product: this.grocery.product,
+        quantity: this.grocery.quantity,
+        price: this.grocery.price,
+        checked: this.grocery.checked
+      });
+    }
     if (this.grocery.checked) {
       this.checkIcon = 'done'
     } else if (!this.grocery.checked) {

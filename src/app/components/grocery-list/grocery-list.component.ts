@@ -40,7 +40,7 @@ export class GroceryListComponent implements AfterContentInit {
     this.icons.set('cereais_e_graos', { color: 'text-yellow-600', icon: 'grain' });
     this.icons.set('congelados_e_frios', { color: 'text-red-500', icon: 'ac_unit' });
     this.icons.set('higiene', { color: 'text-blue-800', icon: 'wash' });
-    this.icons.set('padaria', { color: 'text-orange-200', icon: 'bakery_dining' });
+    this.icons.set('padaria', { color: 'text-orange-600', icon: 'bakery_dining' });
     this.icons.set('enlatados', { color: 'text-red-900', icon: 'view_kanban' });
     this.icons.set('hortifruti', { color: 'text-green-500', icon: 'spa' });
     this.icons.set('bebidas', { color: 'text-purple-500', icon: 'liquor' });
