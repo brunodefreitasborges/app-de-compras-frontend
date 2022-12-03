@@ -10,13 +10,13 @@ Each list is then divided into grocery categories, into which the user can add, 
 
 ## Preview
 
-
+<a href="">![alt text](preview.PNG)</a>
 
 ## Technologies Used
 
-Typescript
-Angular 14
-NgRx (Component Store)
+Typescript <br>
+Angular 14 <br>
+NgRx (Component Store) <br>
 TailwindCSS
 
 ## How to run
