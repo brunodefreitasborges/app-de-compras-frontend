@@ -96,7 +96,23 @@ export class AppStore extends ComponentStore<AppState> {
       switchMap((grocery: Grocery) => this.apiService.deleteGrocery(grocery, this.currentListId).pipe(
         tapResponse(
           () => {
-           this.fetchData()
+            //Remove the grocery from the state
+            this.setState(state => {
+              return {
+                ...state,
+                groceries: [...state.groceries.map(list => {
+                  return {
+                    listName: list.listName,
+                    groceryList: list.groceryList?.map(groceries => {
+                      return {
+                        ...groceries,
+                        groceries: groceries.groceries.filter(groceryItem => groceryItem.product !== grocery.product)
+                      }
+                    })
+                  }
+                })]
+              }
+            });
           },
           (error: HttpErrorResponse) => console.error(error)
         )
