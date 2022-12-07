@@ -13,36 +13,32 @@ export class ApiService {
    }
 
   getGroceries(): Observable<GroceryList[]> {
-    return this.http.get<GroceryList[]>('http://localhost:8080/api/v1',
-    {headers: new HttpHeaders({
-      "authorization": "bruno"
-    })}
-    )
+    return this.http.get<GroceryList[]>('http://localhost:8081/api/v1')
   }
 
   addGrocery(grocery: Grocery, listId: string): Observable<GroceryList> {
-    return this.http.post<GroceryList>(`http://localhost:8080/api/v1/list/${listId}`, grocery, {headers: new HttpHeaders({
+    return this.http.post<GroceryList>(`http://localhost:8081/api/v1/list/${listId}`, grocery, {headers: new HttpHeaders({
       "AllowCrossOrigin": "true"
     })})
   }
 
   updateGrocery(grocery: Grocery, listId: string): Observable<GroceryList> {
-    return this.http.put<GroceryList>(`http://localhost:8080/api/v1/list/${listId}`, grocery)
+    return this.http.put<GroceryList>(`http://localhost:8081/api/v1/list/${listId}`, grocery)
   }
 
   deleteGrocery(grocery: Grocery, listId: string): Observable<any> {
-    return this.http.request('delete', `http://localhost:8080/api/v1/list/${listId}`, {body: grocery});
+    return this.http.request('delete', `http://localhost:8081/api/v1/list/${listId}`, {body: grocery});
   }
 
   addList(listName: string): Observable<GroceryList> {
     const newList: GroceryList = {
       listName: listName,
     }
-    return this.http.post<GroceryList>('http://localhost:8080/api/v1', newList)
+    return this.http.post<GroceryList>('http://localhost:8081/api/v1', newList)
   }
 
   deleteList(list: string): Observable<void>{
-    return this.http.delete<void>(`http://localhost:8080/api/v1/${list}`);
+    return this.http.delete<void>(`http://localhost:8081/api/v1/${list}`);
   }
 
 }

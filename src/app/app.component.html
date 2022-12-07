@@ -4,7 +4,7 @@
       <mat-sidenav class="bg-primary w-1/2" autoFocus="false" mode="push" [opened]="showSideNav">
         <div class="h-full flex flex-col justify-between pt-8">
           <div class="ml-4">
-            <h3 class="text-lg text-white">Minhas Listas</h3>
+            <h3 class="text-lg text-white">Listas de {{userProfile?.firstName}}</h3>
             <ul class="text-white space-y-2">
               <li
               class="text-sm hover:underline transition-all"
@@ -28,6 +28,8 @@
             <button mat-raised-button color="accent"
             (click)="addList()"
             class="font-inter text-primary text-md pt-1 pb-1 w-[96%]">Nova Lista</button>
+            <button (click)="login()" >Login</button>
+            <button (click)="logout()" >Logout</button>
           </div>
         </div>
 

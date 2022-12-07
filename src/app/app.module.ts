@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,24 @@ import { DialogFormComponent } from './components/dialog-form/dialog-form.compon
 import { HomeComponent } from './home/home.component';
 import { GroceryListComponent } from './components/grocery-list/grocery-list.component';
 import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
+
+import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+      keycloak.init({
+          config: {
+              realm: 'groceries',
+              url: 'http://localhost:8080',
+              clientId: 'grocery-app'
+          },
+          initOptions: {
+              onLoad: 'check-sso',
+              silentCheckSsoRedirectUri:
+                  window.location.origin + '/assets/silent-check-sso.html'
+          }
+      });
+}
 
 @NgModule({
   declarations: [
@@ -35,15 +53,24 @@ import { AddListDialogComponent } from './components/add-list-dialog/add-list-di
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    KeycloakAngularModule
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
     AppStore,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NetworkInterceptor,
       multi: true
-    }
+    },
+
+
   ],
   bootstrap: [AppComponent]
 })
