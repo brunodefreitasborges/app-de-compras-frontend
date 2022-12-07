@@ -7,7 +7,6 @@ import { AppStore } from '../store/app.store';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements AfterContentInit {
   groceries$ = this.store.getGroceries();

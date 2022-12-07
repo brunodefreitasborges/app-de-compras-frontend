@@ -10,20 +10,7 @@ import { KeycloakEventType, KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    trigger('listItemAnimation', [
-      transition('unchecked <=> checked', [
-      animate('200ms', keyframes([
-        style({transform: 'scale(1)', offset: 0}),
-        style({transform: 'scale(1.1)', offset: 0.5}),
-        style({transform: 'scale(1)', offset: 1})
-      ])),
-    ])
-    ])
-
-  ],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   title = 'My Groceries';
@@ -55,10 +42,9 @@ export class AppComponent implements OnInit {
     this.keycloak.keycloakEvents$.subscribe({
       next: (e) => {
         if (e.type == KeycloakEventType.OnTokenExpired) {
-          console.log('refresh token automatico!!');
           this.keycloak.updateToken(20);
         } else {
-          console.log('nao atualiza!!');
+          return;
         }
       }
     });
@@ -69,7 +55,7 @@ export class AppComponent implements OnInit {
       this.selectedList  = state.currentList;
     })
   }
-  
+
   login(){
     this.keycloak.login();
   }

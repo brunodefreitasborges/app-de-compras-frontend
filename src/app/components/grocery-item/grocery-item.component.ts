@@ -6,7 +6,6 @@ import { Grocery } from 'src/app/models/grocery-model';
   encapsulation: ViewEncapsulation.None,
   selector: 'app-grocery-item',
   templateUrl: './grocery-item.component.html',
-  styleUrls: ['./grocery-item.component.scss'],
   animations: [
     trigger('checkedState', [
       transition('unchecked <=> checked', [

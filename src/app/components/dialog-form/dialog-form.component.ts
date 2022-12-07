@@ -5,8 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-dialog-form',
-  templateUrl: './dialog-form.component.html',
-  styleUrls: ['./dialog-form.component.scss']
+  templateUrl: './dialog-form.component.html'
 })
 export class DialogFormComponent implements OnInit {
   dialogForm!: FormGroup;
